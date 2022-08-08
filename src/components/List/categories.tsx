@@ -43,4 +43,4 @@ function Categories({ categories, onClick }: Props) {
 export default Categories;
 
 const listItemStyle =
-  "h-8 mx-6 mb-0 first:ml-0 last:mr-0 font-bold whitespace-nowrap text-gray-500 focus:text-black hover:text-black dark:hover:text-gray-200 dark:focus:text-gray-200 transition-all";
+  "h-8 mx-6 mb-0 first:ml-0 last:mr-0 cursor-pointer font-bold whitespace-nowrap text-gray-500 focus:text-black hover:text-black dark:hover:text-gray-200 dark:focus:text-gray-200 transition-all";
