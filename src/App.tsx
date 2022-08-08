@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AppContext from './context/appContext';
 import Header from './components/Header';
+import List from './components/List/';
 import useLocalStorage from './hooks/useLocalStorage';
 
 import './styles/App.css';
@@ -30,6 +31,7 @@ function App() {
       <AppContext.Provider value={{ toggleTheme, theme }}>
         <div className="App" data-theme={theme}>
           <Header />
+          <List />
         </div>
       </AppContext.Provider>
     </QueryClientProvider>
