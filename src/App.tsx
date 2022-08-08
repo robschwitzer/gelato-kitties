@@ -1,25 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AppContext from './context/appContext';
+import useLocalStorage from './hooks/useLocalStorage';
+
+import './styles/App.css';
+
+const client = new QueryClient();
 
 function App() {
+  const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
+
+  useEffect(() => {
+    /* update html class with value stored in LS */
+    document.documentElement.classList[theme === 'dark' ? 'add' : 'remove']('dark');
+  }, [/* eslint-disable-line */]);
+
+  function toggleTheme(): void {
+    setTheme((theme: "light" | "dark") => {
+      /* add/remove class for tailwind */
+      document.documentElement.classList[theme === 'dark' ? 'remove' : 'add']('dark');
+      return theme === 'dark' ? 'light' : 'dark';
+    });
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={client}>
+      <AppContext.Provider value={{ toggleTheme, theme }}>
+        <div className="App" data-theme={theme}>
+
+        </div>
+      </AppContext.Provider>
+    </QueryClientProvider>
   );
 }
 
