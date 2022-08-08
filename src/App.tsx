@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AppContext from './context/appContext';
+import Header from './components/Header';
 import useLocalStorage from './hooks/useLocalStorage';
 
 import './styles/App.css';
@@ -28,7 +29,7 @@ function App() {
     <QueryClientProvider client={client}>
       <AppContext.Provider value={{ toggleTheme, theme }}>
         <div className="App" data-theme={theme}>
-
+          <Header />
         </div>
       </AppContext.Provider>
     </QueryClientProvider>
